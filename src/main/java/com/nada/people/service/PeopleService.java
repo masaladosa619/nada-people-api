@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import com.nada.people.exception.PersonNotFoundException;
 import com.nada.people.model.PathResult;
 import com.nada.people.model.Person;
 
@@ -32,11 +33,15 @@ public class PeopleService {
     public void connect(int a,int b){
 
         if(a==b){
-            throw new IllegalArgumentException("A PERSON CANNOT KNOW THEMSELVES");
+            throw new IllegalArgumentException("A Person Cannot Know Themselves");
         }
 
-        if(!people.containsKey(a) || !people.containsKey(b)){
-            throw new IllegalArgumentException("Person does not exist");
+        if (!people.containsKey(a)) {
+            throw new PersonNotFoundException(a);
+        }
+
+        if (!people.containsKey(b)) {
+            throw new PersonNotFoundException(b);
         }
 
         adjacency.get(a).add(b);
@@ -46,7 +51,7 @@ public class PeopleService {
     
     public List<Person> getContacts(int id) {
     if (!people.containsKey(id)) {
-        throw new IllegalArgumentException("Person does not exist: " + id);
+        throw new PersonNotFoundException(id);
     }
     
     Set<Integer> contactIds = adjacency.get(id);
@@ -66,10 +71,10 @@ public PathResult findPath(int from,int to){
     Map<Integer,Integer> depthOf = new HashMap<>();
 
     if (!people.containsKey(from)) {
-        throw new IllegalArgumentException("Person does not exist: " + from);
+        throw new PersonNotFoundException(from);
     }
     if (!people.containsKey(to)) {
-        throw new IllegalArgumentException("Person does not exist: " + to);
+        throw new PersonNotFoundException(to);
     }
 
     queue.add(from);

@@ -1,5 +1,8 @@
+
 package com.nada.people.model;
 
-public record CreatePersonRequest(String name) {
+import jakarta.validation.constraints.NotBlank;
 
+public record CreatePersonRequest(
+        @NotBlank(message = "name cannot be blank") String name) {
 }
