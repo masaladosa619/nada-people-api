@@ -1,5 +1,7 @@
 package com.nada.people.model;
 
+
+
 public class Person {
 
     private int id;

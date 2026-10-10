@@ -10,10 +10,13 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.nada.people.model.PathResult;
 import com.nada.people.model.Person;
 
 
+@Service 
 public class PeopleService {
     private final Map<Integer,Person> people = new HashMap<>();
     private final Map<Integer, Set<Integer>> adjacency = new HashMap<>();

@@ -1,25 +1,13 @@
 
 package com.nada.people;
 
-import com.google.gson.Gson;
-import com.nada.people.service.PeopleService;
-import com.sun.net.httpserver.HttpServer;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-
+@SpringBootApplication
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        PeopleService peopleService = new PeopleService();
-        Gson gson = new Gson();
-
-        HttpServer server = HttpServer.create(
-                new InetSocketAddress(8080), 0);
-
-        // Endpoints will be registered here.
-
-        server.start();
-        System.out.println("Server running on port 8080");
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
     }
 }
